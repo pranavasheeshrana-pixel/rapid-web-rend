@@ -21,6 +21,7 @@ import { Route as AdminHealthChecksRouteImport } from './routes/admin/health-che
 import { Route as AdminSystemHealthRouteImport } from './routes/admin/system-health'
 import { Route as AdminUsersRouteImport } from './routes/admin/users'
 import { Route as AuditorDashboardRouteImport } from './routes/auditor/dashboard'
+import { Route as AuditorWorkflowLogsRouteImport } from './routes/auditor/workflow-logs'
 import { Route as PatientDashboardRouteImport } from './routes/patient/dashboard'
 import { Route as PatientNewWorkflowRouteImport } from './routes/patient/new-workflow'
 import { Route as PatientUploadDocumentRouteImport } from './routes/patient/upload-document'
@@ -91,6 +92,11 @@ const AuditorDashboardRoute = AuditorDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuditorRouteRoute,
 } as any)
+const AuditorWorkflowLogsRoute = AuditorWorkflowLogsRouteImport.update({
+  id: '/workflow-logs',
+  path: '/workflow-logs',
+  getParentRoute: () => AuditorRouteRoute,
+} as any)
 const PatientDashboardRoute = PatientDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -150,6 +156,7 @@ export interface FileRoutesByFullPath {
   '/admin/system-health': typeof AdminSystemHealthRoute
   '/admin/users': typeof AdminUsersRoute
   '/auditor/dashboard': typeof AuditorDashboardRoute
+  '/auditor/workflow-logs': typeof AuditorWorkflowLogsRoute
   '/patient/dashboard': typeof PatientDashboardRoute
   '/patient/new-workflow': typeof PatientNewWorkflowRoute
   '/patient/upload-document': typeof PatientUploadDocumentRoute
@@ -173,6 +180,7 @@ export interface FileRoutesByTo {
   '/admin/system-health': typeof AdminSystemHealthRoute
   '/admin/users': typeof AdminUsersRoute
   '/auditor/dashboard': typeof AuditorDashboardRoute
+  '/auditor/workflow-logs': typeof AuditorWorkflowLogsRoute
   '/patient/dashboard': typeof PatientDashboardRoute
   '/patient/new-workflow': typeof PatientNewWorkflowRoute
   '/patient/upload-document': typeof PatientUploadDocumentRoute
@@ -197,6 +205,7 @@ export interface FileRoutesById {
   '/admin/system-health': typeof AdminSystemHealthRoute
   '/admin/users': typeof AdminUsersRoute
   '/auditor/dashboard': typeof AuditorDashboardRoute
+  '/auditor/workflow-logs': typeof AuditorWorkflowLogsRoute
   '/patient/dashboard': typeof PatientDashboardRoute
   '/patient/new-workflow': typeof PatientNewWorkflowRoute
   '/patient/upload-document': typeof PatientUploadDocumentRoute
@@ -222,6 +231,7 @@ export interface FileRouteTypes {
     | '/admin/system-health'
     | '/admin/users'
     | '/auditor/dashboard'
+    | '/auditor/workflow-logs'
     | '/patient/dashboard'
     | '/patient/new-workflow'
     | '/patient/upload-document'
@@ -245,6 +255,7 @@ export interface FileRouteTypes {
     | '/admin/system-health'
     | '/admin/users'
     | '/auditor/dashboard'
+    | '/auditor/workflow-logs'
     | '/patient/dashboard'
     | '/patient/new-workflow'
     | '/patient/upload-document'
@@ -268,6 +279,7 @@ export interface FileRouteTypes {
     | '/admin/system-health'
     | '/admin/users'
     | '/auditor/dashboard'
+    | '/auditor/workflow-logs'
     | '/patient/dashboard'
     | '/patient/new-workflow'
     | '/patient/upload-document'
@@ -375,6 +387,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuditorDashboardRouteImport
       parentRoute: typeof AuditorRouteRoute
     }
+    '/auditor/workflow-logs': {
+      id: '/auditor/workflow-logs'
+      path: '/workflow-logs'
+      fullPath: '/auditor/workflow-logs'
+      preLoaderRoute: typeof AuditorWorkflowLogsRouteImport
+      parentRoute: typeof AuditorRouteRoute
+    }
     '/patient/dashboard': {
       id: '/patient/dashboard'
       path: '/dashboard'
@@ -461,10 +480,12 @@ const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
 
 interface AuditorRouteRouteChildren {
   AuditorDashboardRoute: typeof AuditorDashboardRoute
+  AuditorWorkflowLogsRoute: typeof AuditorWorkflowLogsRoute
 }
 
 const AuditorRouteRouteChildren: AuditorRouteRouteChildren = {
   AuditorDashboardRoute: AuditorDashboardRoute,
+  AuditorWorkflowLogsRoute: AuditorWorkflowLogsRoute,
 }
 
 const AuditorRouteRouteWithChildren = AuditorRouteRoute._addFileChildren(

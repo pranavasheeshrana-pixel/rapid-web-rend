@@ -16,6 +16,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as PatientRouteRouteImport } from './routes/patient/route'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as StaffRouteRouteImport } from './routes/staff/route'
+import { Route as PatientDashboardRouteImport } from './routes/patient/dashboard'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -52,42 +53,64 @@ const StaffRouteRoute = StaffRouteRouteImport.update({
   path: '/staff',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PatientDashboardRoute = PatientDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => PatientRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRoute
   '/auditor': typeof AuditorRouteRoute
-  '/patient': typeof PatientRouteRoute
+  '/patient': typeof PatientRouteRouteWithChildren
   '/staff': typeof StaffRouteRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/patient/dashboard': typeof PatientDashboardRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRoute
   '/auditor': typeof AuditorRouteRoute
-  '/patient': typeof PatientRouteRoute
+  '/patient': typeof PatientRouteRouteWithChildren
   '/staff': typeof StaffRouteRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/patient/dashboard': typeof PatientDashboardRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRoute
   '/auditor': typeof AuditorRouteRoute
-  '/patient': typeof PatientRouteRoute
+  '/patient': typeof PatientRouteRouteWithChildren
   '/staff': typeof StaffRouteRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
+  '/patient/dashboard': typeof PatientDashboardRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/admin' | '/auditor' | '/patient' | '/staff' | '/login' | '/register'
+    | '/'
+    | '/admin'
+    | '/auditor'
+    | '/patient'
+    | '/staff'
+    | '/login'
+    | '/register'
+    | '/patient/dashboard'
   fileRoutesByTo: FileRoutesByTo
   to:
-    '/' | '/admin' | '/auditor' | '/patient' | '/staff' | '/login' | '/register'
+    | '/'
+    | '/admin'
+    | '/auditor'
+    | '/patient'
+    | '/staff'
+    | '/login'
+    | '/register'
+    | '/patient/dashboard'
   id:
     | '__root__'
     | '/'
@@ -97,13 +120,14 @@ export interface FileRouteTypes {
     | '/staff'
     | '/login'
     | '/register'
+    | '/patient/dashboard'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRouteRoute: typeof AdminRouteRoute
   AuditorRouteRoute: typeof AuditorRouteRoute
-  PatientRouteRoute: typeof PatientRouteRoute
+  PatientRouteRoute: typeof PatientRouteRouteWithChildren
   StaffRouteRoute: typeof StaffRouteRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
@@ -160,14 +184,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/patient/dashboard': {
+      id: '/patient/dashboard'
+      path: '/dashboard'
+      fullPath: '/patient/dashboard'
+      preLoaderRoute: typeof PatientDashboardRouteImport
+      parentRoute: typeof PatientRouteRoute
+    }
   }
 }
+
+interface PatientRouteRouteChildren {
+  PatientDashboardRoute: typeof PatientDashboardRoute
+}
+
+const PatientRouteRouteChildren: PatientRouteRouteChildren = {
+  PatientDashboardRoute: PatientDashboardRoute,
+}
+
+const PatientRouteRouteWithChildren = PatientRouteRoute._addFileChildren(
+  PatientRouteRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRouteRoute: AdminRouteRoute,
   AuditorRouteRoute: AuditorRouteRoute,
-  PatientRouteRoute: PatientRouteRoute,
+  PatientRouteRoute: PatientRouteRouteWithChildren,
   StaffRouteRoute: StaffRouteRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,

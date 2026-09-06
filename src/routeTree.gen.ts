@@ -22,6 +22,7 @@ import { Route as PatientUploadDocumentRouteImport } from './routes/patient/uplo
 import { Route as PatientWorkflowsRouteImport } from './routes/patient/workflows'
 import { Route as StaffActiveWorkflowsRouteImport } from './routes/staff/active-workflows'
 import { Route as StaffDashboardRouteImport } from './routes/staff/dashboard'
+import { Route as StaffReviewQueueRouteImport } from './routes/staff/review-queue'
 import { Route as PatientDocumentReviewIdRouteImport } from './routes/patient/document-review.$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -89,6 +90,11 @@ const StaffDashboardRoute = StaffDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => StaffRouteRoute,
 } as any)
+const StaffReviewQueueRoute = StaffReviewQueueRouteImport.update({
+  id: '/review-queue',
+  path: '/review-queue',
+  getParentRoute: () => StaffRouteRoute,
+} as any)
 const PatientDocumentReviewIdRoute = PatientDocumentReviewIdRouteImport.update({
   id: '/document-review/$id',
   path: '/document-review/$id',
@@ -109,6 +115,7 @@ export interface FileRoutesByFullPath {
   '/patient/workflows': typeof PatientWorkflowsRoute
   '/staff/active-workflows': typeof StaffActiveWorkflowsRoute
   '/staff/dashboard': typeof StaffDashboardRoute
+  '/staff/review-queue': typeof StaffReviewQueueRoute
   '/patient/document-review/$id': typeof PatientDocumentReviewIdRoute
 }
 export interface FileRoutesByTo {
@@ -125,6 +132,7 @@ export interface FileRoutesByTo {
   '/patient/workflows': typeof PatientWorkflowsRoute
   '/staff/active-workflows': typeof StaffActiveWorkflowsRoute
   '/staff/dashboard': typeof StaffDashboardRoute
+  '/staff/review-queue': typeof StaffReviewQueueRoute
   '/patient/document-review/$id': typeof PatientDocumentReviewIdRoute
 }
 export interface FileRoutesById {
@@ -142,6 +150,7 @@ export interface FileRoutesById {
   '/patient/workflows': typeof PatientWorkflowsRoute
   '/staff/active-workflows': typeof StaffActiveWorkflowsRoute
   '/staff/dashboard': typeof StaffDashboardRoute
+  '/staff/review-queue': typeof StaffReviewQueueRoute
   '/patient/document-review/$id': typeof PatientDocumentReviewIdRoute
 }
 export interface FileRouteTypes {
@@ -160,6 +169,7 @@ export interface FileRouteTypes {
     | '/patient/workflows'
     | '/staff/active-workflows'
     | '/staff/dashboard'
+    | '/staff/review-queue'
     | '/patient/document-review/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -176,6 +186,7 @@ export interface FileRouteTypes {
     | '/patient/workflows'
     | '/staff/active-workflows'
     | '/staff/dashboard'
+    | '/staff/review-queue'
     | '/patient/document-review/$id'
   id:
     | '__root__'
@@ -192,6 +203,7 @@ export interface FileRouteTypes {
     | '/patient/workflows'
     | '/staff/active-workflows'
     | '/staff/dashboard'
+    | '/staff/review-queue'
     | '/patient/document-review/$id'
   fileRoutesById: FileRoutesById
 }
@@ -298,6 +310,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffDashboardRouteImport
       parentRoute: typeof StaffRouteRoute
     }
+    '/staff/review-queue': {
+      id: '/staff/review-queue'
+      path: '/review-queue'
+      fullPath: '/staff/review-queue'
+      preLoaderRoute: typeof StaffReviewQueueRouteImport
+      parentRoute: typeof StaffRouteRoute
+    }
     '/patient/document-review/$id': {
       id: '/patient/document-review/$id'
       path: '/document-review/$id'
@@ -331,11 +350,13 @@ const PatientRouteRouteWithChildren = PatientRouteRoute._addFileChildren(
 interface StaffRouteRouteChildren {
   StaffActiveWorkflowsRoute: typeof StaffActiveWorkflowsRoute
   StaffDashboardRoute: typeof StaffDashboardRoute
+  StaffReviewQueueRoute: typeof StaffReviewQueueRoute
 }
 
 const StaffRouteRouteChildren: StaffRouteRouteChildren = {
   StaffActiveWorkflowsRoute: StaffActiveWorkflowsRoute,
   StaffDashboardRoute: StaffDashboardRoute,
+  StaffReviewQueueRoute: StaffReviewQueueRoute,
 }
 
 const StaffRouteRouteWithChildren = StaffRouteRoute._addFileChildren(

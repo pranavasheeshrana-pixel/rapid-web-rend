@@ -17,6 +17,7 @@ import { Route as PatientRouteRouteImport } from './routes/patient/route'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as StaffRouteRouteImport } from './routes/staff/route'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
+import { Route as AdminHealthChecksRouteImport } from './routes/admin/health-checks'
 import { Route as AdminSystemHealthRouteImport } from './routes/admin/system-health'
 import { Route as AdminUsersRouteImport } from './routes/admin/users'
 import { Route as PatientDashboardRouteImport } from './routes/patient/dashboard'
@@ -67,6 +68,11 @@ const StaffRouteRoute = StaffRouteRouteImport.update({
 const AdminDashboardRoute = AdminDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminHealthChecksRoute = AdminHealthChecksRouteImport.update({
+  id: '/health-checks',
+  path: '/health-checks',
   getParentRoute: () => AdminRouteRoute,
 } as any)
 const AdminSystemHealthRoute = AdminSystemHealthRouteImport.update({
@@ -134,6 +140,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/health-checks': typeof AdminHealthChecksRoute
   '/admin/system-health': typeof AdminSystemHealthRoute
   '/admin/users': typeof AdminUsersRoute
   '/patient/dashboard': typeof PatientDashboardRoute
@@ -155,6 +162,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/health-checks': typeof AdminHealthChecksRoute
   '/admin/system-health': typeof AdminSystemHealthRoute
   '/admin/users': typeof AdminUsersRoute
   '/patient/dashboard': typeof PatientDashboardRoute
@@ -177,6 +185,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/health-checks': typeof AdminHealthChecksRoute
   '/admin/system-health': typeof AdminSystemHealthRoute
   '/admin/users': typeof AdminUsersRoute
   '/patient/dashboard': typeof PatientDashboardRoute
@@ -200,6 +209,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/admin/dashboard'
+    | '/admin/health-checks'
     | '/admin/system-health'
     | '/admin/users'
     | '/patient/dashboard'
@@ -221,6 +231,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/admin/dashboard'
+    | '/admin/health-checks'
     | '/admin/system-health'
     | '/admin/users'
     | '/patient/dashboard'
@@ -242,6 +253,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/admin/dashboard'
+    | '/admin/health-checks'
     | '/admin/system-health'
     | '/admin/users'
     | '/patient/dashboard'
@@ -321,6 +333,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/admin/dashboard'
       preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/health-checks': {
+      id: '/admin/health-checks'
+      path: '/health-checks'
+      fullPath: '/admin/health-checks'
+      preLoaderRoute: typeof AdminHealthChecksRouteImport
       parentRoute: typeof AdminRouteRoute
     }
     '/admin/system-health': {
@@ -405,12 +424,14 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteRouteChildren {
   AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminHealthChecksRoute: typeof AdminHealthChecksRoute
   AdminSystemHealthRoute: typeof AdminSystemHealthRoute
   AdminUsersRoute: typeof AdminUsersRoute
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminDashboardRoute: AdminDashboardRoute,
+  AdminHealthChecksRoute: AdminHealthChecksRoute,
   AdminSystemHealthRoute: AdminSystemHealthRoute,
   AdminUsersRoute: AdminUsersRoute,
 }

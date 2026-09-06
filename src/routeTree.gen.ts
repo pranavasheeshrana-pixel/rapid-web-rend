@@ -20,6 +20,7 @@ import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
 import { Route as AdminHealthChecksRouteImport } from './routes/admin/health-checks'
 import { Route as AdminSystemHealthRouteImport } from './routes/admin/system-health'
 import { Route as AdminUsersRouteImport } from './routes/admin/users'
+import { Route as AuditorDashboardRouteImport } from './routes/auditor/dashboard'
 import { Route as PatientDashboardRouteImport } from './routes/patient/dashboard'
 import { Route as PatientNewWorkflowRouteImport } from './routes/patient/new-workflow'
 import { Route as PatientUploadDocumentRouteImport } from './routes/patient/upload-document'
@@ -85,6 +86,11 @@ const AdminUsersRoute = AdminUsersRouteImport.update({
   path: '/users',
   getParentRoute: () => AdminRouteRoute,
 } as any)
+const AuditorDashboardRoute = AuditorDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuditorRouteRoute,
+} as any)
 const PatientDashboardRoute = PatientDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -134,7 +140,7 @@ const PatientDocumentReviewIdRoute = PatientDocumentReviewIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
-  '/auditor': typeof AuditorRouteRoute
+  '/auditor': typeof AuditorRouteRouteWithChildren
   '/patient': typeof PatientRouteRouteWithChildren
   '/staff': typeof StaffRouteRouteWithChildren
   '/login': typeof LoginRoute
@@ -143,6 +149,7 @@ export interface FileRoutesByFullPath {
   '/admin/health-checks': typeof AdminHealthChecksRoute
   '/admin/system-health': typeof AdminSystemHealthRoute
   '/admin/users': typeof AdminUsersRoute
+  '/auditor/dashboard': typeof AuditorDashboardRoute
   '/patient/dashboard': typeof PatientDashboardRoute
   '/patient/new-workflow': typeof PatientNewWorkflowRoute
   '/patient/upload-document': typeof PatientUploadDocumentRoute
@@ -156,7 +163,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
-  '/auditor': typeof AuditorRouteRoute
+  '/auditor': typeof AuditorRouteRouteWithChildren
   '/patient': typeof PatientRouteRouteWithChildren
   '/staff': typeof StaffRouteRouteWithChildren
   '/login': typeof LoginRoute
@@ -165,6 +172,7 @@ export interface FileRoutesByTo {
   '/admin/health-checks': typeof AdminHealthChecksRoute
   '/admin/system-health': typeof AdminSystemHealthRoute
   '/admin/users': typeof AdminUsersRoute
+  '/auditor/dashboard': typeof AuditorDashboardRoute
   '/patient/dashboard': typeof PatientDashboardRoute
   '/patient/new-workflow': typeof PatientNewWorkflowRoute
   '/patient/upload-document': typeof PatientUploadDocumentRoute
@@ -179,7 +187,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRouteRouteWithChildren
-  '/auditor': typeof AuditorRouteRoute
+  '/auditor': typeof AuditorRouteRouteWithChildren
   '/patient': typeof PatientRouteRouteWithChildren
   '/staff': typeof StaffRouteRouteWithChildren
   '/login': typeof LoginRoute
@@ -188,6 +196,7 @@ export interface FileRoutesById {
   '/admin/health-checks': typeof AdminHealthChecksRoute
   '/admin/system-health': typeof AdminSystemHealthRoute
   '/admin/users': typeof AdminUsersRoute
+  '/auditor/dashboard': typeof AuditorDashboardRoute
   '/patient/dashboard': typeof PatientDashboardRoute
   '/patient/new-workflow': typeof PatientNewWorkflowRoute
   '/patient/upload-document': typeof PatientUploadDocumentRoute
@@ -212,6 +221,7 @@ export interface FileRouteTypes {
     | '/admin/health-checks'
     | '/admin/system-health'
     | '/admin/users'
+    | '/auditor/dashboard'
     | '/patient/dashboard'
     | '/patient/new-workflow'
     | '/patient/upload-document'
@@ -234,6 +244,7 @@ export interface FileRouteTypes {
     | '/admin/health-checks'
     | '/admin/system-health'
     | '/admin/users'
+    | '/auditor/dashboard'
     | '/patient/dashboard'
     | '/patient/new-workflow'
     | '/patient/upload-document'
@@ -256,6 +267,7 @@ export interface FileRouteTypes {
     | '/admin/health-checks'
     | '/admin/system-health'
     | '/admin/users'
+    | '/auditor/dashboard'
     | '/patient/dashboard'
     | '/patient/new-workflow'
     | '/patient/upload-document'
@@ -270,7 +282,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRouteRoute: typeof AdminRouteRouteWithChildren
-  AuditorRouteRoute: typeof AuditorRouteRoute
+  AuditorRouteRoute: typeof AuditorRouteRouteWithChildren
   PatientRouteRoute: typeof PatientRouteRouteWithChildren
   StaffRouteRoute: typeof StaffRouteRouteWithChildren
   LoginRoute: typeof LoginRoute
@@ -356,6 +368,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminUsersRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/auditor/dashboard': {
+      id: '/auditor/dashboard'
+      path: '/dashboard'
+      fullPath: '/auditor/dashboard'
+      preLoaderRoute: typeof AuditorDashboardRouteImport
+      parentRoute: typeof AuditorRouteRoute
+    }
     '/patient/dashboard': {
       id: '/patient/dashboard'
       path: '/dashboard'
@@ -440,6 +459,18 @@ const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
   AdminRouteRouteChildren,
 )
 
+interface AuditorRouteRouteChildren {
+  AuditorDashboardRoute: typeof AuditorDashboardRoute
+}
+
+const AuditorRouteRouteChildren: AuditorRouteRouteChildren = {
+  AuditorDashboardRoute: AuditorDashboardRoute,
+}
+
+const AuditorRouteRouteWithChildren = AuditorRouteRoute._addFileChildren(
+  AuditorRouteRouteChildren,
+)
+
 interface PatientRouteRouteChildren {
   PatientDashboardRoute: typeof PatientDashboardRoute
   PatientNewWorkflowRoute: typeof PatientNewWorkflowRoute
@@ -481,7 +512,7 @@ const StaffRouteRouteWithChildren = StaffRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRouteRoute: AdminRouteRouteWithChildren,
-  AuditorRouteRoute: AuditorRouteRoute,
+  AuditorRouteRoute: AuditorRouteRouteWithChildren,
   PatientRouteRoute: PatientRouteRouteWithChildren,
   StaffRouteRoute: StaffRouteRouteWithChildren,
   LoginRoute: LoginRoute,

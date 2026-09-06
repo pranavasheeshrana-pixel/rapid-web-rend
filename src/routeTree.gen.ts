@@ -20,6 +20,7 @@ import { Route as PatientDashboardRouteImport } from './routes/patient/dashboard
 import { Route as PatientNewWorkflowRouteImport } from './routes/patient/new-workflow'
 import { Route as PatientUploadDocumentRouteImport } from './routes/patient/upload-document'
 import { Route as PatientWorkflowsRouteImport } from './routes/patient/workflows'
+import { Route as StaffActiveWorkflowsRouteImport } from './routes/staff/active-workflows'
 import { Route as StaffDashboardRouteImport } from './routes/staff/dashboard'
 import { Route as PatientDocumentReviewIdRouteImport } from './routes/patient/document-review.$id'
 
@@ -78,6 +79,11 @@ const PatientWorkflowsRoute = PatientWorkflowsRouteImport.update({
   path: '/workflows',
   getParentRoute: () => PatientRouteRoute,
 } as any)
+const StaffActiveWorkflowsRoute = StaffActiveWorkflowsRouteImport.update({
+  id: '/active-workflows',
+  path: '/active-workflows',
+  getParentRoute: () => StaffRouteRoute,
+} as any)
 const StaffDashboardRoute = StaffDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -101,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/patient/new-workflow': typeof PatientNewWorkflowRoute
   '/patient/upload-document': typeof PatientUploadDocumentRoute
   '/patient/workflows': typeof PatientWorkflowsRoute
+  '/staff/active-workflows': typeof StaffActiveWorkflowsRoute
   '/staff/dashboard': typeof StaffDashboardRoute
   '/patient/document-review/$id': typeof PatientDocumentReviewIdRoute
 }
@@ -116,6 +123,7 @@ export interface FileRoutesByTo {
   '/patient/new-workflow': typeof PatientNewWorkflowRoute
   '/patient/upload-document': typeof PatientUploadDocumentRoute
   '/patient/workflows': typeof PatientWorkflowsRoute
+  '/staff/active-workflows': typeof StaffActiveWorkflowsRoute
   '/staff/dashboard': typeof StaffDashboardRoute
   '/patient/document-review/$id': typeof PatientDocumentReviewIdRoute
 }
@@ -132,6 +140,7 @@ export interface FileRoutesById {
   '/patient/new-workflow': typeof PatientNewWorkflowRoute
   '/patient/upload-document': typeof PatientUploadDocumentRoute
   '/patient/workflows': typeof PatientWorkflowsRoute
+  '/staff/active-workflows': typeof StaffActiveWorkflowsRoute
   '/staff/dashboard': typeof StaffDashboardRoute
   '/patient/document-review/$id': typeof PatientDocumentReviewIdRoute
 }
@@ -149,6 +158,7 @@ export interface FileRouteTypes {
     | '/patient/new-workflow'
     | '/patient/upload-document'
     | '/patient/workflows'
+    | '/staff/active-workflows'
     | '/staff/dashboard'
     | '/patient/document-review/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -164,6 +174,7 @@ export interface FileRouteTypes {
     | '/patient/new-workflow'
     | '/patient/upload-document'
     | '/patient/workflows'
+    | '/staff/active-workflows'
     | '/staff/dashboard'
     | '/patient/document-review/$id'
   id:
@@ -179,6 +190,7 @@ export interface FileRouteTypes {
     | '/patient/new-workflow'
     | '/patient/upload-document'
     | '/patient/workflows'
+    | '/staff/active-workflows'
     | '/staff/dashboard'
     | '/patient/document-review/$id'
   fileRoutesById: FileRoutesById
@@ -272,6 +284,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PatientWorkflowsRouteImport
       parentRoute: typeof PatientRouteRoute
     }
+    '/staff/active-workflows': {
+      id: '/staff/active-workflows'
+      path: '/active-workflows'
+      fullPath: '/staff/active-workflows'
+      preLoaderRoute: typeof StaffActiveWorkflowsRouteImport
+      parentRoute: typeof StaffRouteRoute
+    }
     '/staff/dashboard': {
       id: '/staff/dashboard'
       path: '/dashboard'
@@ -310,10 +329,12 @@ const PatientRouteRouteWithChildren = PatientRouteRoute._addFileChildren(
 )
 
 interface StaffRouteRouteChildren {
+  StaffActiveWorkflowsRoute: typeof StaffActiveWorkflowsRoute
   StaffDashboardRoute: typeof StaffDashboardRoute
 }
 
 const StaffRouteRouteChildren: StaffRouteRouteChildren = {
+  StaffActiveWorkflowsRoute: StaffActiveWorkflowsRoute,
   StaffDashboardRoute: StaffDashboardRoute,
 }
 

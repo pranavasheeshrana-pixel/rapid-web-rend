@@ -17,6 +17,7 @@ import { Route as PatientRouteRouteImport } from './routes/patient/route'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as StaffRouteRouteImport } from './routes/staff/route'
 import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
+import { Route as AdminUsersRouteImport } from './routes/admin/users'
 import { Route as PatientDashboardRouteImport } from './routes/patient/dashboard'
 import { Route as PatientNewWorkflowRouteImport } from './routes/patient/new-workflow'
 import { Route as PatientUploadDocumentRouteImport } from './routes/patient/upload-document'
@@ -65,6 +66,11 @@ const StaffRouteRoute = StaffRouteRouteImport.update({
 const AdminDashboardRoute = AdminDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
   getParentRoute: () => AdminRouteRoute,
 } as any)
 const PatientDashboardRoute = PatientDashboardRouteImport.update({
@@ -122,6 +128,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/users': typeof AdminUsersRoute
   '/patient/dashboard': typeof PatientDashboardRoute
   '/patient/new-workflow': typeof PatientNewWorkflowRoute
   '/patient/upload-document': typeof PatientUploadDocumentRoute
@@ -141,6 +148,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/users': typeof AdminUsersRoute
   '/patient/dashboard': typeof PatientDashboardRoute
   '/patient/new-workflow': typeof PatientNewWorkflowRoute
   '/patient/upload-document': typeof PatientUploadDocumentRoute
@@ -161,6 +169,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/users': typeof AdminUsersRoute
   '/patient/dashboard': typeof PatientDashboardRoute
   '/patient/new-workflow': typeof PatientNewWorkflowRoute
   '/patient/upload-document': typeof PatientUploadDocumentRoute
@@ -182,6 +191,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/admin/dashboard'
+    | '/admin/users'
     | '/patient/dashboard'
     | '/patient/new-workflow'
     | '/patient/upload-document'
@@ -201,6 +211,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/admin/dashboard'
+    | '/admin/users'
     | '/patient/dashboard'
     | '/patient/new-workflow'
     | '/patient/upload-document'
@@ -220,6 +231,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/admin/dashboard'
+    | '/admin/users'
     | '/patient/dashboard'
     | '/patient/new-workflow'
     | '/patient/upload-document'
@@ -299,6 +311,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDashboardRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/patient/dashboard': {
       id: '/patient/dashboard'
       path: '/dashboard'
@@ -367,10 +386,12 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteRouteChildren {
   AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminUsersRoute: typeof AdminUsersRoute
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminDashboardRoute: AdminDashboardRoute,
+  AdminUsersRoute: AdminUsersRoute,
 }
 
 const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(

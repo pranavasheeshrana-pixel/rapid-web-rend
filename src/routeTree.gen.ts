@@ -10,33 +10,295 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteRouteImport } from './routes/admin/route'
+import { Route as AuditorRouteRouteImport } from './routes/auditor/route'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as PatientRouteRouteImport } from './routes/patient/route'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as StaffRouteRouteImport } from './routes/staff/route'
+import { Route as AdminDashboardRouteImport } from './routes/admin/dashboard'
+import { Route as AdminHealthChecksRouteImport } from './routes/admin/health-checks'
+import { Route as AdminSystemHealthRouteImport } from './routes/admin/system-health'
+import { Route as AdminUsersRouteImport } from './routes/admin/users'
+import { Route as AuditorDashboardRouteImport } from './routes/auditor/dashboard'
+import { Route as AuditorWorkflowLogsRouteImport } from './routes/auditor/workflow-logs'
+import { Route as PatientDashboardRouteImport } from './routes/patient/dashboard'
+import { Route as PatientNewWorkflowRouteImport } from './routes/patient/new-workflow'
+import { Route as PatientUploadDocumentRouteImport } from './routes/patient/upload-document'
+import { Route as PatientWorkflowsRouteImport } from './routes/patient/workflows'
+import { Route as StaffActiveWorkflowsRouteImport } from './routes/staff/active-workflows'
+import { Route as StaffDashboardRouteImport } from './routes/staff/dashboard'
+import { Route as StaffProcessingRouteImport } from './routes/staff/processing'
+import { Route as StaffReviewQueueRouteImport } from './routes/staff/review-queue'
+import { Route as PatientDocumentReviewIdRouteImport } from './routes/patient/document-review.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRouteRoute = AdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuditorRouteRoute = AuditorRouteRouteImport.update({
+  id: '/auditor',
+  path: '/auditor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PatientRouteRoute = PatientRouteRouteImport.update({
+  id: '/patient',
+  path: '/patient',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StaffRouteRoute = StaffRouteRouteImport.update({
+  id: '/staff',
+  path: '/staff',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminHealthChecksRoute = AdminHealthChecksRouteImport.update({
+  id: '/health-checks',
+  path: '/health-checks',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminSystemHealthRoute = AdminSystemHealthRouteImport.update({
+  id: '/system-health',
+  path: '/system-health',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AuditorDashboardRoute = AuditorDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuditorRouteRoute,
+} as any)
+const AuditorWorkflowLogsRoute = AuditorWorkflowLogsRouteImport.update({
+  id: '/workflow-logs',
+  path: '/workflow-logs',
+  getParentRoute: () => AuditorRouteRoute,
+} as any)
+const PatientDashboardRoute = PatientDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => PatientRouteRoute,
+} as any)
+const PatientNewWorkflowRoute = PatientNewWorkflowRouteImport.update({
+  id: '/new-workflow',
+  path: '/new-workflow',
+  getParentRoute: () => PatientRouteRoute,
+} as any)
+const PatientUploadDocumentRoute = PatientUploadDocumentRouteImport.update({
+  id: '/upload-document',
+  path: '/upload-document',
+  getParentRoute: () => PatientRouteRoute,
+} as any)
+const PatientWorkflowsRoute = PatientWorkflowsRouteImport.update({
+  id: '/workflows',
+  path: '/workflows',
+  getParentRoute: () => PatientRouteRoute,
+} as any)
+const StaffActiveWorkflowsRoute = StaffActiveWorkflowsRouteImport.update({
+  id: '/active-workflows',
+  path: '/active-workflows',
+  getParentRoute: () => StaffRouteRoute,
+} as any)
+const StaffDashboardRoute = StaffDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => StaffRouteRoute,
+} as any)
+const StaffProcessingRoute = StaffProcessingRouteImport.update({
+  id: '/processing',
+  path: '/processing',
+  getParentRoute: () => StaffRouteRoute,
+} as any)
+const StaffReviewQueueRoute = StaffReviewQueueRouteImport.update({
+  id: '/review-queue',
+  path: '/review-queue',
+  getParentRoute: () => StaffRouteRoute,
+} as any)
+const PatientDocumentReviewIdRoute = PatientDocumentReviewIdRouteImport.update({
+  id: '/document-review/$id',
+  path: '/document-review/$id',
+  getParentRoute: () => PatientRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteRouteWithChildren
+  '/auditor': typeof AuditorRouteRouteWithChildren
+  '/patient': typeof PatientRouteRouteWithChildren
+  '/staff': typeof StaffRouteRouteWithChildren
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/health-checks': typeof AdminHealthChecksRoute
+  '/admin/system-health': typeof AdminSystemHealthRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/auditor/dashboard': typeof AuditorDashboardRoute
+  '/auditor/workflow-logs': typeof AuditorWorkflowLogsRoute
+  '/patient/dashboard': typeof PatientDashboardRoute
+  '/patient/new-workflow': typeof PatientNewWorkflowRoute
+  '/patient/upload-document': typeof PatientUploadDocumentRoute
+  '/patient/workflows': typeof PatientWorkflowsRoute
+  '/staff/active-workflows': typeof StaffActiveWorkflowsRoute
+  '/staff/dashboard': typeof StaffDashboardRoute
+  '/staff/processing': typeof StaffProcessingRoute
+  '/staff/review-queue': typeof StaffReviewQueueRoute
+  '/patient/document-review/$id': typeof PatientDocumentReviewIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteRouteWithChildren
+  '/auditor': typeof AuditorRouteRouteWithChildren
+  '/patient': typeof PatientRouteRouteWithChildren
+  '/staff': typeof StaffRouteRouteWithChildren
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/health-checks': typeof AdminHealthChecksRoute
+  '/admin/system-health': typeof AdminSystemHealthRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/auditor/dashboard': typeof AuditorDashboardRoute
+  '/auditor/workflow-logs': typeof AuditorWorkflowLogsRoute
+  '/patient/dashboard': typeof PatientDashboardRoute
+  '/patient/new-workflow': typeof PatientNewWorkflowRoute
+  '/patient/upload-document': typeof PatientUploadDocumentRoute
+  '/patient/workflows': typeof PatientWorkflowsRoute
+  '/staff/active-workflows': typeof StaffActiveWorkflowsRoute
+  '/staff/dashboard': typeof StaffDashboardRoute
+  '/staff/processing': typeof StaffProcessingRoute
+  '/staff/review-queue': typeof StaffReviewQueueRoute
+  '/patient/document-review/$id': typeof PatientDocumentReviewIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteRouteWithChildren
+  '/auditor': typeof AuditorRouteRouteWithChildren
+  '/patient': typeof PatientRouteRouteWithChildren
+  '/staff': typeof StaffRouteRouteWithChildren
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/admin/dashboard': typeof AdminDashboardRoute
+  '/admin/health-checks': typeof AdminHealthChecksRoute
+  '/admin/system-health': typeof AdminSystemHealthRoute
+  '/admin/users': typeof AdminUsersRoute
+  '/auditor/dashboard': typeof AuditorDashboardRoute
+  '/auditor/workflow-logs': typeof AuditorWorkflowLogsRoute
+  '/patient/dashboard': typeof PatientDashboardRoute
+  '/patient/new-workflow': typeof PatientNewWorkflowRoute
+  '/patient/upload-document': typeof PatientUploadDocumentRoute
+  '/patient/workflows': typeof PatientWorkflowsRoute
+  '/staff/active-workflows': typeof StaffActiveWorkflowsRoute
+  '/staff/dashboard': typeof StaffDashboardRoute
+  '/staff/processing': typeof StaffProcessingRoute
+  '/staff/review-queue': typeof StaffReviewQueueRoute
+  '/patient/document-review/$id': typeof PatientDocumentReviewIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/auditor'
+    | '/patient'
+    | '/staff'
+    | '/login'
+    | '/register'
+    | '/admin/dashboard'
+    | '/admin/health-checks'
+    | '/admin/system-health'
+    | '/admin/users'
+    | '/auditor/dashboard'
+    | '/auditor/workflow-logs'
+    | '/patient/dashboard'
+    | '/patient/new-workflow'
+    | '/patient/upload-document'
+    | '/patient/workflows'
+    | '/staff/active-workflows'
+    | '/staff/dashboard'
+    | '/staff/processing'
+    | '/staff/review-queue'
+    | '/patient/document-review/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/admin'
+    | '/auditor'
+    | '/patient'
+    | '/staff'
+    | '/login'
+    | '/register'
+    | '/admin/dashboard'
+    | '/admin/health-checks'
+    | '/admin/system-health'
+    | '/admin/users'
+    | '/auditor/dashboard'
+    | '/auditor/workflow-logs'
+    | '/patient/dashboard'
+    | '/patient/new-workflow'
+    | '/patient/upload-document'
+    | '/patient/workflows'
+    | '/staff/active-workflows'
+    | '/staff/dashboard'
+    | '/staff/processing'
+    | '/staff/review-queue'
+    | '/patient/document-review/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/auditor'
+    | '/patient'
+    | '/staff'
+    | '/login'
+    | '/register'
+    | '/admin/dashboard'
+    | '/admin/health-checks'
+    | '/admin/system-health'
+    | '/admin/users'
+    | '/auditor/dashboard'
+    | '/auditor/workflow-logs'
+    | '/patient/dashboard'
+    | '/patient/new-workflow'
+    | '/patient/upload-document'
+    | '/patient/workflows'
+    | '/staff/active-workflows'
+    | '/staff/dashboard'
+    | '/staff/processing'
+    | '/staff/review-queue'
+    | '/patient/document-review/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRouteRoute: typeof AdminRouteRouteWithChildren
+  AuditorRouteRoute: typeof AuditorRouteRouteWithChildren
+  PatientRouteRoute: typeof PatientRouteRouteWithChildren
+  StaffRouteRoute: typeof StaffRouteRouteWithChildren
+  LoginRoute: typeof LoginRoute
+  RegisterRoute: typeof RegisterRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +310,234 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auditor': {
+      id: '/auditor'
+      path: '/auditor'
+      fullPath: '/auditor'
+      preLoaderRoute: typeof AuditorRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/patient': {
+      id: '/patient'
+      path: '/patient'
+      fullPath: '/patient'
+      preLoaderRoute: typeof PatientRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/staff': {
+      id: '/staff'
+      path: '/staff'
+      fullPath: '/staff'
+      preLoaderRoute: typeof StaffRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/dashboard': {
+      id: '/admin/dashboard'
+      path: '/dashboard'
+      fullPath: '/admin/dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/health-checks': {
+      id: '/admin/health-checks'
+      path: '/health-checks'
+      fullPath: '/admin/health-checks'
+      preLoaderRoute: typeof AdminHealthChecksRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/system-health': {
+      id: '/admin/system-health'
+      path: '/system-health'
+      fullPath: '/admin/system-health'
+      preLoaderRoute: typeof AdminSystemHealthRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/auditor/dashboard': {
+      id: '/auditor/dashboard'
+      path: '/dashboard'
+      fullPath: '/auditor/dashboard'
+      preLoaderRoute: typeof AuditorDashboardRouteImport
+      parentRoute: typeof AuditorRouteRoute
+    }
+    '/auditor/workflow-logs': {
+      id: '/auditor/workflow-logs'
+      path: '/workflow-logs'
+      fullPath: '/auditor/workflow-logs'
+      preLoaderRoute: typeof AuditorWorkflowLogsRouteImport
+      parentRoute: typeof AuditorRouteRoute
+    }
+    '/patient/dashboard': {
+      id: '/patient/dashboard'
+      path: '/dashboard'
+      fullPath: '/patient/dashboard'
+      preLoaderRoute: typeof PatientDashboardRouteImport
+      parentRoute: typeof PatientRouteRoute
+    }
+    '/patient/new-workflow': {
+      id: '/patient/new-workflow'
+      path: '/new-workflow'
+      fullPath: '/patient/new-workflow'
+      preLoaderRoute: typeof PatientNewWorkflowRouteImport
+      parentRoute: typeof PatientRouteRoute
+    }
+    '/patient/upload-document': {
+      id: '/patient/upload-document'
+      path: '/upload-document'
+      fullPath: '/patient/upload-document'
+      preLoaderRoute: typeof PatientUploadDocumentRouteImport
+      parentRoute: typeof PatientRouteRoute
+    }
+    '/patient/workflows': {
+      id: '/patient/workflows'
+      path: '/workflows'
+      fullPath: '/patient/workflows'
+      preLoaderRoute: typeof PatientWorkflowsRouteImport
+      parentRoute: typeof PatientRouteRoute
+    }
+    '/staff/active-workflows': {
+      id: '/staff/active-workflows'
+      path: '/active-workflows'
+      fullPath: '/staff/active-workflows'
+      preLoaderRoute: typeof StaffActiveWorkflowsRouteImport
+      parentRoute: typeof StaffRouteRoute
+    }
+    '/staff/dashboard': {
+      id: '/staff/dashboard'
+      path: '/dashboard'
+      fullPath: '/staff/dashboard'
+      preLoaderRoute: typeof StaffDashboardRouteImport
+      parentRoute: typeof StaffRouteRoute
+    }
+    '/staff/processing': {
+      id: '/staff/processing'
+      path: '/processing'
+      fullPath: '/staff/processing'
+      preLoaderRoute: typeof StaffProcessingRouteImport
+      parentRoute: typeof StaffRouteRoute
+    }
+    '/staff/review-queue': {
+      id: '/staff/review-queue'
+      path: '/review-queue'
+      fullPath: '/staff/review-queue'
+      preLoaderRoute: typeof StaffReviewQueueRouteImport
+      parentRoute: typeof StaffRouteRoute
+    }
+    '/patient/document-review/$id': {
+      id: '/patient/document-review/$id'
+      path: '/document-review/$id'
+      fullPath: '/patient/document-review/$id'
+      preLoaderRoute: typeof PatientDocumentReviewIdRouteImport
+      parentRoute: typeof PatientRouteRoute
+    }
   }
 }
 
+interface AdminRouteRouteChildren {
+  AdminDashboardRoute: typeof AdminDashboardRoute
+  AdminHealthChecksRoute: typeof AdminHealthChecksRoute
+  AdminSystemHealthRoute: typeof AdminSystemHealthRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+}
+
+const AdminRouteRouteChildren: AdminRouteRouteChildren = {
+  AdminDashboardRoute: AdminDashboardRoute,
+  AdminHealthChecksRoute: AdminHealthChecksRoute,
+  AdminSystemHealthRoute: AdminSystemHealthRoute,
+  AdminUsersRoute: AdminUsersRoute,
+}
+
+const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
+  AdminRouteRouteChildren,
+)
+
+interface AuditorRouteRouteChildren {
+  AuditorDashboardRoute: typeof AuditorDashboardRoute
+  AuditorWorkflowLogsRoute: typeof AuditorWorkflowLogsRoute
+}
+
+const AuditorRouteRouteChildren: AuditorRouteRouteChildren = {
+  AuditorDashboardRoute: AuditorDashboardRoute,
+  AuditorWorkflowLogsRoute: AuditorWorkflowLogsRoute,
+}
+
+const AuditorRouteRouteWithChildren = AuditorRouteRoute._addFileChildren(
+  AuditorRouteRouteChildren,
+)
+
+interface PatientRouteRouteChildren {
+  PatientDashboardRoute: typeof PatientDashboardRoute
+  PatientNewWorkflowRoute: typeof PatientNewWorkflowRoute
+  PatientUploadDocumentRoute: typeof PatientUploadDocumentRoute
+  PatientWorkflowsRoute: typeof PatientWorkflowsRoute
+  PatientDocumentReviewIdRoute: typeof PatientDocumentReviewIdRoute
+}
+
+const PatientRouteRouteChildren: PatientRouteRouteChildren = {
+  PatientDashboardRoute: PatientDashboardRoute,
+  PatientNewWorkflowRoute: PatientNewWorkflowRoute,
+  PatientUploadDocumentRoute: PatientUploadDocumentRoute,
+  PatientWorkflowsRoute: PatientWorkflowsRoute,
+  PatientDocumentReviewIdRoute: PatientDocumentReviewIdRoute,
+}
+
+const PatientRouteRouteWithChildren = PatientRouteRoute._addFileChildren(
+  PatientRouteRouteChildren,
+)
+
+interface StaffRouteRouteChildren {
+  StaffActiveWorkflowsRoute: typeof StaffActiveWorkflowsRoute
+  StaffDashboardRoute: typeof StaffDashboardRoute
+  StaffProcessingRoute: typeof StaffProcessingRoute
+  StaffReviewQueueRoute: typeof StaffReviewQueueRoute
+}
+
+const StaffRouteRouteChildren: StaffRouteRouteChildren = {
+  StaffActiveWorkflowsRoute: StaffActiveWorkflowsRoute,
+  StaffDashboardRoute: StaffDashboardRoute,
+  StaffProcessingRoute: StaffProcessingRoute,
+  StaffReviewQueueRoute: StaffReviewQueueRoute,
+}
+
+const StaffRouteRouteWithChildren = StaffRouteRoute._addFileChildren(
+  StaffRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRouteRoute: AdminRouteRouteWithChildren,
+  AuditorRouteRoute: AuditorRouteRouteWithChildren,
+  PatientRouteRoute: PatientRouteRouteWithChildren,
+  StaffRouteRoute: StaffRouteRouteWithChildren,
+  LoginRoute: LoginRoute,
+  RegisterRoute: RegisterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

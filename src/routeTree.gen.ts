@@ -22,6 +22,7 @@ import { Route as PatientUploadDocumentRouteImport } from './routes/patient/uplo
 import { Route as PatientWorkflowsRouteImport } from './routes/patient/workflows'
 import { Route as StaffActiveWorkflowsRouteImport } from './routes/staff/active-workflows'
 import { Route as StaffDashboardRouteImport } from './routes/staff/dashboard'
+import { Route as StaffProcessingRouteImport } from './routes/staff/processing'
 import { Route as StaffReviewQueueRouteImport } from './routes/staff/review-queue'
 import { Route as PatientDocumentReviewIdRouteImport } from './routes/patient/document-review.$id'
 
@@ -90,6 +91,11 @@ const StaffDashboardRoute = StaffDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => StaffRouteRoute,
 } as any)
+const StaffProcessingRoute = StaffProcessingRouteImport.update({
+  id: '/processing',
+  path: '/processing',
+  getParentRoute: () => StaffRouteRoute,
+} as any)
 const StaffReviewQueueRoute = StaffReviewQueueRouteImport.update({
   id: '/review-queue',
   path: '/review-queue',
@@ -115,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/patient/workflows': typeof PatientWorkflowsRoute
   '/staff/active-workflows': typeof StaffActiveWorkflowsRoute
   '/staff/dashboard': typeof StaffDashboardRoute
+  '/staff/processing': typeof StaffProcessingRoute
   '/staff/review-queue': typeof StaffReviewQueueRoute
   '/patient/document-review/$id': typeof PatientDocumentReviewIdRoute
 }
@@ -132,6 +139,7 @@ export interface FileRoutesByTo {
   '/patient/workflows': typeof PatientWorkflowsRoute
   '/staff/active-workflows': typeof StaffActiveWorkflowsRoute
   '/staff/dashboard': typeof StaffDashboardRoute
+  '/staff/processing': typeof StaffProcessingRoute
   '/staff/review-queue': typeof StaffReviewQueueRoute
   '/patient/document-review/$id': typeof PatientDocumentReviewIdRoute
 }
@@ -150,6 +158,7 @@ export interface FileRoutesById {
   '/patient/workflows': typeof PatientWorkflowsRoute
   '/staff/active-workflows': typeof StaffActiveWorkflowsRoute
   '/staff/dashboard': typeof StaffDashboardRoute
+  '/staff/processing': typeof StaffProcessingRoute
   '/staff/review-queue': typeof StaffReviewQueueRoute
   '/patient/document-review/$id': typeof PatientDocumentReviewIdRoute
 }
@@ -169,6 +178,7 @@ export interface FileRouteTypes {
     | '/patient/workflows'
     | '/staff/active-workflows'
     | '/staff/dashboard'
+    | '/staff/processing'
     | '/staff/review-queue'
     | '/patient/document-review/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -186,6 +196,7 @@ export interface FileRouteTypes {
     | '/patient/workflows'
     | '/staff/active-workflows'
     | '/staff/dashboard'
+    | '/staff/processing'
     | '/staff/review-queue'
     | '/patient/document-review/$id'
   id:
@@ -203,6 +214,7 @@ export interface FileRouteTypes {
     | '/patient/workflows'
     | '/staff/active-workflows'
     | '/staff/dashboard'
+    | '/staff/processing'
     | '/staff/review-queue'
     | '/patient/document-review/$id'
   fileRoutesById: FileRoutesById
@@ -310,6 +322,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaffDashboardRouteImport
       parentRoute: typeof StaffRouteRoute
     }
+    '/staff/processing': {
+      id: '/staff/processing'
+      path: '/processing'
+      fullPath: '/staff/processing'
+      preLoaderRoute: typeof StaffProcessingRouteImport
+      parentRoute: typeof StaffRouteRoute
+    }
     '/staff/review-queue': {
       id: '/staff/review-queue'
       path: '/review-queue'
@@ -350,12 +369,14 @@ const PatientRouteRouteWithChildren = PatientRouteRoute._addFileChildren(
 interface StaffRouteRouteChildren {
   StaffActiveWorkflowsRoute: typeof StaffActiveWorkflowsRoute
   StaffDashboardRoute: typeof StaffDashboardRoute
+  StaffProcessingRoute: typeof StaffProcessingRoute
   StaffReviewQueueRoute: typeof StaffReviewQueueRoute
 }
 
 const StaffRouteRouteChildren: StaffRouteRouteChildren = {
   StaffActiveWorkflowsRoute: StaffActiveWorkflowsRoute,
   StaffDashboardRoute: StaffDashboardRoute,
+  StaffProcessingRoute: StaffProcessingRoute,
   StaffReviewQueueRoute: StaffReviewQueueRoute,
 }
 

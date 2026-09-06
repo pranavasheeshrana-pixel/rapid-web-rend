@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as PatientRouteRouteImport } from './routes/patient/route'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as StaffRouteRouteImport } from './routes/staff/route'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,16 +35,23 @@ const RegisterRoute = RegisterRouteImport.update({
   path: '/register',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StaffRouteRoute = StaffRouteRouteImport.update({
+  id: '/staff',
+  path: '/staff',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/patient': typeof PatientRouteRoute
+  '/staff': typeof StaffRouteRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/patient': typeof PatientRouteRoute
+  '/staff': typeof StaffRouteRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
 }
@@ -51,20 +59,22 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/patient': typeof PatientRouteRoute
+  '/staff': typeof StaffRouteRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/patient' | '/login' | '/register'
+  fullPaths: '/' | '/patient' | '/staff' | '/login' | '/register'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/patient' | '/login' | '/register'
-  id: '__root__' | '/' | '/patient' | '/login' | '/register'
+  to: '/' | '/patient' | '/staff' | '/login' | '/register'
+  id: '__root__' | '/' | '/patient' | '/staff' | '/login' | '/register'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PatientRouteRoute: typeof PatientRouteRoute
+  StaffRouteRoute: typeof StaffRouteRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
 }
@@ -99,12 +109,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/staff': {
+      id: '/staff'
+      path: '/staff'
+      fullPath: '/staff'
+      preLoaderRoute: typeof StaffRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PatientRouteRoute: PatientRouteRoute,
+  StaffRouteRoute: StaffRouteRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
 }
